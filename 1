@@ -1,16 +1,16 @@
 /*Practice one*/
 /*First Data query from table Person.Person*/
 select *
-from Person.Person
+from Person.Person;
 /*Second Data query from HumanResource.Employee which selects only Marketing specialist*/
 select *
 from HumanResources.Employee
-where JobTitle like '%Marketing specialist'
+where JobTitle like '%Marketing specialist';
 /*Third Data query on the same table in which HireDate is ordered from recent to latest*/
 select *
 from HumanResources.Employee
-order by HireDate desc
+order by HireDate desc;
 /*Four Data query from Production.Product products from 20 to 100 cost*/
 select *
 from Production.Product
-where ListPrice between 20 and 100
+where ListPrice between 20 and 100;
