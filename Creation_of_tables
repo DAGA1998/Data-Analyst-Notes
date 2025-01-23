@@ -1,0 +1,18 @@
+/*Second Practice with DDL and DML instructions 
+to create new tables*/
+create schema F1;-- a new schema for the database
+create table F1.Pilots(
+Pilot_ID int,
+Pilot_Name varchar(255),
+Age int,
+Team_Name varchar(255),
+);-- creation of pilots table
+--changing values null into not null
+alter table F1.pilots
+alter column Age int not null;
+alter table F1.pilots
+alter column Pilot_Name varchar not null;
+alter table F1.pilots
+alter column Pilot_ID varchar not null;
+alter table F1.pilots
+alter column Team_Name varchar not null;
