@@ -12,6 +12,7 @@ values (01, 'Alexander Albon', 'Williams', '1996-03-23', 2, 240, 0);
 --visualizing changes
 select * 
 from F1.Pilots;
+--Inserting multiple records
 insert into 
 F1.Pilots (Pilot_ID, Pilot_Name, Team_Name,Birth_Date,Podiums,Points,World_Championships)
 VALUES 
