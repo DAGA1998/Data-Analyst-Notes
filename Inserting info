@@ -12,3 +12,9 @@ values (01, 'Alexander Albon', 'Williams', '1996-03-23', 2, 240, 0);
 --visualizing changes
 select * 
 from F1.Pilots;
+insert into 
+F1.Pilots (Pilot_ID, Pilot_Name, Team_Name,Birth_Date,Podiums,Points,World_Championships)
+VALUES 
+    (02, 'Carlos Sainz', 'Williams', '1994-09-01', 27, 1272.5, 0),
+    (03, 'Pierre Gasly', 'Alpine', '1996-02-07', 5, 436, 0),
+    (04, 'Jack Doohan', 'Alpine', '2003-01-20', 0, 0, 0);
