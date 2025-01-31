@@ -1,0 +1,15 @@
+--Data erasing, delete erase especific records on database
+select *
+from F1.Pilots;
+delete from F1.Pilots
+where Pilot_ID = 2;
+
+delete from F1.Pilots
+where Pilot_ID = 3;
+
+delete from F1.Pilots
+where Pilot_ID = 4;
+--Truncate eliminates all records maintaining columns
+truncate table F1.pilots;
+--Drop table eliminates all the table from database
+drop table F1.pilots;
