@@ -1,1 +1,13 @@
+ALTER TABLE ADD COLUMN: Este comando se utiliza para agregar una nueva columna a una tabla existente. 
+La sintaxis es ALTER TABLE nombre_de_la_tabla ADD nombre_de_la_columna tipo_de_dato . 
+Por ejemplo, ALTER TABLE empleados ADD nombre_departamento VARCHAR(50) 
+agregará una nueva columna llamada "nombre_departamento" de tipo cadena a la tabla "empleados".
 
+ALTER TABLE ALTER COLUMN: Se emplea para modificar el tipo de dato de una columna existente en una tabla. 
+La sintaxis es ALTER TABLE nombre_de_la_tabla ALTER COLUMN nombre_de_la_columna nuevo_tipo_de_dato . 
+Por ejemplo, ALTER TABLE empleados ALTER COLUMN nombre_departamento VARCHAR(MAX) cambiará el tipo de dato de la columna "nombre_departamento" 
+a un tipo de cadena con longitud máxima permitida.
+
+ALTER TABLE DROP COLUMN: Este comando se utiliza para eliminar una columna de una tabla existente. 
+La sintaxis es ALTER TABLE nombre_de_la_tabla DROP COLUMN nombre_de_la_columna. 
+Por ejemplo, ALTER TABLE empleados DROP COLUMN nombre_departamento eliminará la columna "nombre_departamento" de la tabla "empleados".
