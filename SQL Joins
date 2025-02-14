@@ -1,0 +1,11 @@
+--Uniones en SQL
+--Primero Haremos una inner join de la lista de ventas con los productos correspondientes.
+select SalesOrderDetail.SalesOrderID,
+SalesOrderDetail.ProductID, 
+Product.Name
+from Sales.SalesOrderDetail
+inner join 
+Production.Product
+on
+SalesOrderDetail.ProductID = Product.ProductID;
+--Solo devuelve las filas donde hay coincidencias en ambas tablas
