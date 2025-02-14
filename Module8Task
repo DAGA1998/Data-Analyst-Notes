@@ -1,0 +1,52 @@
+--Modulo 8 EBAC practica 
+create table Ventas(Numero_de_Orden int, 
+Fecha_de_orden datetime, Fecha_de_entrega date, 
+Estatus_de_Orden char(255), Nombre_cliente char(255),
+Domicilio_entrega varchar(255), Compra_online char(255),
+Metodo_pago char(255),  subtotal money );
+--visualizacion
+select *
+from Ordenes;
+--columna de observaciones y fecha de envio
+alter table dbo.Ordenes add Observaciones char(255),
+Fecha_de_envio datetime;
+-- agregando los 5 registros
+insert into 
+dbo.Ordenes (Numero_de_Orden, Fecha_de_orden, Fecha_de_entrega,
+Estatus_de_Orden, Nombre_cliente, Domicilio_entrega, Compra_online,
+Metodo_pago, Subtotal, Observaciones, Fecha_de_envio)
+Values 
+(01,'2024-03-06 17:30:00',GETDATE(), 'En Proceso', 'Michael Cera'
+, 'Avenida moctezuma 008 colonia aragon', 'S', 'Tarjeta de debito', 3204.50,
+'Cliente recibe fines de semana', '2024-03-07 01:01:01'),
+(02,'2024-04-13 10:20:12','2024-04-14', 'Completado', 'Jammes Dutton'
+, 'Yellowstone Montana 137 ', 'S', 'Tarjeta de credito', 12300.00,
+'Cliente recibe entre semana', '2024-04-13 11:20:12'),
+(03,'2024-05-22 02:00:23','2024-05-24', 'Completado', 'Tony Soprano'
+, 'North Caldwell Nueva Jersey', 'S', 'Tarjeta de credito', 500000.00,
+'Cliente recibe todos los dias','2024-05-22 03:00:23'),
+(04,'2025-02-13','2025-03-01 01:01:01', 'Pendiente', 'Jet Li'
+, 'Hangzhou, Zhejiang', 'S', 'Tarjeta de debito', 32.50,
+'Cliente recibe fines de semana', '2025-02-14'),
+(05,'2024-03-06 17:30:00',GETDATE(), 'En Proceso', 'Linus Torvalds'
+, 'Gustavo a madero CDMX', 'N', 'Efectivo', 4000.60,
+'Cliente recibe fines de semana', '2024-03-07 01:01:00');
+--Comando que permite renombrar columnas de Compra_Online a BanderaCompraOnline 
+EXEC sp_rename 'Ordenes.CompraOnline', 'BanderaCompraOnline', 'COLUMN';
+--Creando nueva tabla Prueba
+create table Prueba (Columna_Prueba int);
+select *
+from Prueba;
+--5 nuevos regitros
+insert into
+Prueba (Columna_Prueba)
+values (1),(2),(3),(4),(5);
+--Truncate y drop table
+truncate table Prueba;
+drop table Prueba;
+--Delete en registros cancelados al no tener usamos update para agregarlos
+update Ordenes 
+set  Estatus_de_Orden= 'Cancelado'
+where  Estatus_de_Orden= 'Pendiente';
+delete from Ordenes
+where Estatus_de_Orden = 'Cancelado';
