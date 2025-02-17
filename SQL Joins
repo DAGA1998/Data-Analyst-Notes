@@ -9,3 +9,57 @@ Production.Product
 on
 SalesOrderDetail.ProductID = Product.ProductID;
 --Solo devuelve las filas donde hay coincidencias en ambas tablas
+-- Ahora, obtendremos todas las ventas y si estan disponibles, los nombres de los productos con left join
+select 
+SalesOrderDetail.SalesOrderID,
+SalesOrderDetail.ProductID, 
+Product.Name
+from 
+Sales.SalesOrderDetail
+left join 
+Production.Product
+on
+SalesOrderDetail.ProductID = Product.ProductID;
+/*El LEFT JOIN devuelve todas las filas de la tabla SalesOrderDetail y 
+las filas coincidentes de la tabla Product. 
+Las filas de SalesOrderDetail 
+que no tienen coincidencias en Product mostrarán NULL en las columnas de Product.*/
+--Si queremos ver todos los productos y si estan disponibles, usamos un right join.
+select 
+SalesOrderDetail.SalesOrderID,
+SalesOrderDetail.ProductID, 
+Product.Name
+from 
+Sales.SalesOrderDetail
+right join 
+Production.Product
+on
+SalesOrderDetail.ProductID = Product.ProductID;
+/*El right join devuelve todas las filas de la tabla Product y las 
+filas coincidentes de la tabla SalesOrderDetail.
+Las filas de Product que no tiene coincidencias en SalesOrderDetail*/
+/*Obtendremos todas las ventas y todos los productos, independientemente de las coincidencias con
+full outer join */
+select 
+SalesOrderDetail.SalesOrderID,
+SalesOrderDetail.ProductID, 
+Product.Name
+from 
+Sales.SalesOrderDetail
+full outer join 
+Production.Product
+on
+SalesOrderDetail.ProductID = Product.ProductID;
+--Devolvimos todas las filas con coincidencia y cuando no hay coincidencia mostrara null.
+/* Finalmente, si necesitamos el producto cartesiano de las dos tablas, podemos
+usar un cross join. Esto devuelve todas las combinaciones posibles de las filas 
+de las dos tablas*/
+select 
+SalesOrderDetail.SalesOrderID,
+SalesOrderDetail.ProductID, 
+Product.Name
+from 
+Sales.SalesOrderDetail
+cross join 
+Production.Product;
+-- hay que tener cuidado con este comando porque puede devolver millones de filas
