@@ -35,3 +35,9 @@ p.pilot_name
 from F1.Pilots p
 inner join F1.GP2024 o
 on p.pilot_id = o.winner;
+--Outer join all pilots winnings
+select p.Pilot_Name,
+o.GP
+from F1.Pilots p
+Left Outer join F1.GP2024 o
+on   p.pilot_id = o.winner;
