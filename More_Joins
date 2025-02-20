@@ -1,0 +1,37 @@
+insert into 
+f1.pilots(Pilot_ID,Pilot_Name,Team_Name,Birth_Date,Podiums,World_Championships,Points)
+values
+(01,'Max verstappen', 'Redbull Racing Team', '1997-07-30', 112, 4, 3023.50),
+(02,'Sergio Checo Perez', 'Redbull Racing Team', '1990-01-26', 39, 0, 1638),
+(03,'Lewis Hamilton', 'Mercedes', '1985-01-07', 202, 7, 4862.50),
+(04,'George Russell', 'Mercedes', '1998-02-15', 15, 0, 714),
+(05,'Lando Norris', 'McLaren', '1999-11-13', 26, 0, 1007),
+(06,'Oscar Piastri', 'McLaren', '2001-04-06', 10, 0, 389),
+(07,'Charles Leclerc', 'Ferrari', '1997-10-16', 43, 0, 1430),
+(08,'Carlos Sainz', 'Ferrari', '1994-09-01', 27, 0, 1272.50),
+(09,'Fernando Alonso', 'Aston Martin', '1981-07-29', 106, 2, 2337),
+(10,'Lance Stroll', 'Aston Martin', '1998-10-29', 3, 0, 292);
+select *
+from F1.Pilots;
+create table F1.GP2024(Track_ID int, GP char(255), Winner int);
+select *
+from F1.GP2024;
+insert into 
+F1.GP2024(Track_ID, GP , Winner)
+values
+(01, 'Barain', 01),
+(02, 'Saudi Arabia', 01),
+(03, 'Australia', 08),
+(04, 'Japon', 01),
+(05, 'China', 01),
+(06, 'Miami', 05),
+(07, 'Emilia-Romaña', 01),
+(08, 'Monaco', 07),
+(09, 'Canada', 01),
+(10, 'España', 01);
+select 
+o.gp,
+p.pilot_name
+from F1.Pilots p
+inner join F1.GP2024 o
+on p.pilot_id = o.winner;
