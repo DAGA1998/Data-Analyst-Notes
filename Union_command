@@ -1,0 +1,15 @@
+--Union Combina los nombres de productos de dos tablas diferentes sin duplicados
+select Name
+from Production.Product
+union
+select Name 
+from Production.ProductModel;
+--Union All Combina los nombres de productos de dos tablas diferentes con duplicados
+select Name
+from Production.Product
+union all
+select Name 
+from Production.ProductModel;
+/*Considera que la funcion UNION al combinar tablas 
+necesita que dichas tablas tengan el mismo numero de columnas, caso contrario mandara error 
+y para evitarlo podemos seleccionar las columnas que deseemos combinar*/
