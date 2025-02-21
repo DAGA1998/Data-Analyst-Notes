@@ -1,0 +1,44 @@
+/* Instruccion CASE
+ Define condiciones If-Else dentro de una consulta*/
+ Select Name,
+ ListPrice,
+ Case
+ when ListPrice > 100 then 'Caro'
+ when ListPrice between 50 and 100 then 'Moderado'
+ else 'Barato'
+ end as CategoriaPrecio
+ from
+ Production.Product;
+ /*Las condiciones se evaluan en el orden que son listadas*/
+
+ /*Instruccion Coalesce para devolver la primera expresion que 
+ no sea nula de una lista dada*/
+ Select 
+ p.Name,
+ coalesce(pd.Description, 'No disponible') as Descripcion
+ from 
+ Production.Product p
+ left join 
+ Production.ProductModelProductDescriptionCulture pdpc
+ on
+ p.ProductModelID = pdpc.ProductModelID
+ left join
+ production.ProductDescription pd
+ on
+ pdpc.ProductDescriptionID = pd.ProductDescriptionID;
+ /*Si todas las expresiones son nulas devolvera null, en este caso se le
+ indico que sustituyera null por No disponible en la descripcion del producto*/
+
+ /*Con la función ISNULL podremos devolver un valor alternativo si el primer parámetro 
+ de la funcion es Null*/
+ select 
+ p.Name,
+ ISNULL(i.Quantity,0) as CantidadEnStock
+ From
+ Production.Product p
+ Left join 
+ Production.ProductInventory i
+ on 
+ p.ProductID = i.ProductID;
+/*Devolvera Null si el valor alterno tambien es nulo, en este caso le indicamos
+que devolviera 0 para valores nulos*/
