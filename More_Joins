@@ -35,9 +35,31 @@ p.pilot_name
 from F1.Pilots p
 inner join F1.GP2024 o
 on p.pilot_id = o.winner;
---Outer join all pilots winnings
+--Left Outer join all pilots winnings
 select p.Pilot_Name,
 o.GP
 from F1.Pilots p
 Left Outer join F1.GP2024 o
 on   p.pilot_id = o.winner;
+--Outer right join Only the Granprix
+select p.Pilot_Name,
+o.GP
+from F1.Pilots p
+Right Outer join F1.GP2024 o
+on   p.pilot_id = o.winner;
+--Full outer join All the records
+select p.Pilot_Name,
+o.GP
+from F1.Pilots p
+Full Outer join F1.GP2024 o
+on   p.pilot_id = o.winner;
+--Cross join 
+select *
+from F1.Pilots
+cross join F1.GP2024;
+-- Muestra solo pilotname y GP
+select 
+p.Pilot_Name,
+o.GP
+from F1.Pilots p
+cross join F1.GP2024 o;
