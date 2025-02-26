@@ -1,0 +1,84 @@
+--Primera actividad
+select 
+pp.FirstName,
+pp.LastName,
+hr.JobTitle
+from HumanResources.Employee hr
+inner join Person.Person pp
+on hr.BusinessEntityID = pp.BusinessEntityID;
+--Segunda actividad
+select 
+sc.CustomerID,
+pp.FirstName,
+pp.LastName
+from Sales.Customer sc
+Left Outer join Person.Person pp
+on  sc.PersonID = pp.BusinessEntityID;
+--Tercer actividad
+select 
+soh.SalesOrderID,
+sc.CustomerID
+from Sales.SalesOrderHeader soh
+Right Outer join Sales.Customer sc
+on  sc.CustomerID = soh.CustomerID;
+--Cuarta actividad
+select 
+prd.Name,
+prr.Comments
+from Production.Product prd
+Full Outer join Production.ProductReview prr
+on prd.ProductID = prr.ProductID;
+--Quinta actividad 
+select
+prd.Name,
+prc.CategoryName
+from Production.ProductCategory prc
+cross join Production.Product prd;
+--Sexta actividad 
+--Primer consulta
+select Name
+from Production.Product
+union
+select Name 
+from Production.ProductModel;
+--Segunda consulta
+select Name
+from Production.Product
+union all
+select Name 
+from Production.ProductModel;
+--Septima actividad 
+--Case
+Select 
+BusinessEntityID,
+coalesce(JobTitle, 'No Title')as JobTitle,
+Case
+when JobTitle like '%Manager' then 'Manager'
+else 'Not Manager'
+end as JobCategory
+from
+HumanResources.Employee;
+--end case
+--Se debe modificar el tipo de dato para que acepte nulos
+alter table HumanResources.Employee alter column JobTitle varchar(50);
+--Eliminaremos un titulo en este caso el del empleado 240 y ejecutamos de nuevo el codigo case 
+update HumanResources.Employee
+set JobTitle = NULL
+where BusinessEntityID = 240;
+--Al ejecutar de nuevo la instruccion case devuelve "No Title" al empleado 240
+--Octava Actividad
+Select 
+BusinessEntityID,
+SalesQuota,
+ISNULL(SalesQuota, '0') as QuotaStatus 
+from
+Sales.SalesPerson;
+/*No se puede agregar la expresion "No quota" porque la funcion ISNULL tiene que aceptar 
+el mismo tipo de dato, como la columna "SalesQuota" es de tipo Money*/
+SELECT 
+BusinessEntityID,
+SalesQuota,
+ISNULL(CONVERT(VARCHAR, SalesQuota), 'No quota') AS QuotaStatus
+FROM 
+Sales.SalesPerson;
+--Al convertir el tipo de dato se puede mostrar un valor de cadena 
