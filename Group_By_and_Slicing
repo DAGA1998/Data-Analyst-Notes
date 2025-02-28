@@ -1,0 +1,11 @@
+--Agrupacion y particionamiento de datos
+--Practica 1
+/*Calculo total de ventas por cada producto en la tabla de 
+sales Order Detail*/
+select 
+ProductID,
+sum(LineTotal) as TotalSales-- Suma y crea una columna TotalSales 
+from Sales.SalesOrderDetail
+group by ProductID;--Agrupa por ProductID
+
+--Practica 2
