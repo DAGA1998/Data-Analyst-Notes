@@ -1,0 +1,39 @@
+--Agrupacion y particionamiento de datos
+--Practica 1
+/*Calculo total de ventas por cada producto en la tabla de 
+sales Order Detail*/
+select 
+ProductID,
+sum(LineTotal) as TotalSales-- Suma y crea una columna TotalSales 
+from Sales.SalesOrderDetail
+group by ProductID;--Agrupa por ProductID
+--Practica 2
+/*Calculo de clientes preferentes dentro de la base de datos*/
+Select s.CustomerID, p.FirstName, p.LastName, SUM(TotalDue) as MontoTotal -- la suma se devuelve como una cuarta columna 
+from [Sales].[SalesOrderHeader] s
+--doble inner join el primero busca relaciones en los customers ID
+inner join Sales.Customer c on s.CustomerID = c.CustomerID
+--el segundo relaciona PersonID con su businessEntityID 
+inner join Person.Person p on c.PersonID = p.BusinessEntityID
+Group by s.CustomerID, p.FirstName, p.LastName
+--por ultimo devuelve y agrupa Los customersID First y Last name en Orden descendente de la columna monto total
+Order by 4 desc;
+--Practica 3
+/*Hacemos lo mismo que en la practica dos pero agregamos un condicional where para limitar la busqueda*/
+Select s.CustomerID, p.FirstName, p.LastName, SUM(TotalDue) as MontoTotal
+from [Sales].[SalesOrderHeader] s
+inner join Sales.Customer c on s.CustomerID = c.CustomerID
+inner join Person.Person p on c.PersonID = p.BusinessEntityID
+where s.OnlineOrderFlag = 1-- filtra por ventas online, si se le agrega 0 son ventas fisicas 
+Group by s.CustomerID, p.FirstName, p.LastName
+Order by 4 desc;
+--Practica 4
+/*Ahora Hacemos un Having para filtrar aun mas la busqueda con una condicion para funciones de agregacion*/
+Select s.CustomerID, p.FirstName, p.LastName, SUM(TotalDue) as MontoTotal
+from [Sales].[SalesOrderHeader] s
+inner join Sales.Customer c on s.CustomerID = c.CustomerID
+inner join Person.Person p on c.PersonID = p.BusinessEntityID
+where s.OnlineOrderFlag = 1 
+Group by s.CustomerID, p.FirstName, p.LastName
+Having Sum(TotalDue) >= 10000.00 --Condicion que el total due dentro de la funcion de agregacion SUM sea mayor o igual a 10,000.00
+Order by 4 desc;
