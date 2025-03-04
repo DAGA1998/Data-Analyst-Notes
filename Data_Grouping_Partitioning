@@ -37,3 +37,19 @@ where s.OnlineOrderFlag = 1
 Group by s.CustomerID, p.FirstName, p.LastName
 Having Sum(TotalDue) >= 10000.00 --Condicion que el total due dentro de la funcion de agregacion SUM sea mayor o igual a 10,000.00
 Order by 4 desc;
+--Practica 5 
+/*Filtramos los productos con ventas superiores a 100,000.00 con un Having*/
+Select ProductID, Sum(LineTotal) as TotalSales
+From Sales.SalesOrderDetail
+Group by ProductID
+Having Sum(LineTotal) > 100000
+Order by 2 desc;
+--Practica 6
+/*Con over y partition by calculamos el total de ventas por SalesOrderID*/
+Select 
+SalesOrderID, 
+ProductID, 
+LineTotal,
+Sum(LineTotal) Over (Partition by SalesOrderID) as TotalSalesPerOrder
+from Sales.SalesOrderDetail
+Order by 4 desc;
