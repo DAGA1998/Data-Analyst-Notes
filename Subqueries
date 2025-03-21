@@ -1,0 +1,6 @@
+select
+p.Name,
+(Select sum(OrderQty)
+from Sales.SalesOrderDetail sod
+where p.ProductID = sod.ProductID)
+from Sales.SalesOrderDetail p;
