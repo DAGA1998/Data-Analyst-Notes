@@ -20,3 +20,16 @@ on the same category, while the  external selects products which price is more t
 
 /*Derived Table*/
 Select
+    p.Name
+    totals.TotalSold
+From
+    Production.Product p
+Join
+    (Select ProductID, Sum(OrderQty) As TotalSold
+    From
+        Sales.SalesOrderDetail
+        Group By ProductID) As totals
+on
+    p.ProductID = totals.ProductID;
+/*Inside the join the derived table groups sales based on the product ID and calculates total sold of each product,
+the principal query joins all results of TotalSold with Production.Product to obtain the name of products and his sales*/
