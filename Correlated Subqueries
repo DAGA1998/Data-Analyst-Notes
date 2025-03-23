@@ -1,0 +1,22 @@
+/*Correlated subquery*/
+Select
+    p.Name,
+    p.ListPrice,
+    p.ProductSubcategoryID
+from 
+    Production.Product p
+where--correlated  subquery begins
+    p.ListPrice >(
+    Select 
+        Avg(p2.ListPrice)
+    From 
+        Production.Product p2
+    Where
+        p2.ProductSubcategoryID = p.ProductSubcategoryID)--Correlated subquery ends;
+/*The difference between a non correlated subquery is that 
+being executed in where clause the correlated subquery executes for each 
+row of the external query and in this case calculates the average price list of products
+on the same category, while the  external selects products which price is more than the average*/
+
+/*Derived Table*/
+Select
