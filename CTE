@@ -1,0 +1,20 @@
+/*Defining a Common Table Expresion*/
+With CategoryAvgPrice As(
+    Select 
+        ProductSubcategoryID,
+    Group By 
+      ProductSubcategoryID)
+--Using the CTE on the principal Query
+Select 
+    p.Name,
+    p.ListPrice,
+    cte.AvgPrice --Calling it
+From
+    Production.Product p
+Join 
+    CategoryAvgPrice cte --Defined as cte
+on
+    p.ProductSubcategoryID
+Where
+    p.ListPrice > cte.AvgPrice;
+/*CategoryAvgPrice calculates the average price for each subcategory 
