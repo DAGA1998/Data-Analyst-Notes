@@ -1,19 +1,23 @@
 /* First Practice Subqueries on select clause*/
 Select
-  p.Name,
+    p.Name,
     --Subquery created
-      (Select sum(OrderQty)
-      from Sales.SalesOrderDetail sod
-      where p.ProductID = sod.ProductID) as TotalSold --Subquery finished 
--- Comparing the product ID between both tables and showing as Total sold
-  from Production.Product p;
+  (Select Sum(OrderQty)
+      From 
+          Sales.SalesOrderDetail sod
+      Where 
+          p.ProductID = sod.ProductID) As TotalSold --Subquery finished 
+    -- Comparing the product ID between both tables and showing as Total sold
+      From Production.Product p;
 
 /*Second Practice Subqueries on where clause*/
 Select
-  Name, 
-  ListPrice
-    From Production.Product
-    Where ListPrice > (SELECT AVG(ListPrice) FROM Production.Product);
+    Name, 
+    ListPrice
+  From 
+        Production.Product
+    Where 
+        ListPrice > (SELECT AVG(ListPrice) FROM Production.Product);
 /*Inside the where conditional we create a subquerie to call the average price 
 from products and showing only the top products from it, resulting in the expensive ones*/
 
@@ -21,11 +25,14 @@ from products and showing only the top products from it, resulting in the expens
 Select
     p.Name,
     totals.TotalSold
-from 
+From 
     Production.Product p
-JOIN 
-    (SELECT ProductID, SUM(OrderQty) AS TotalSold 
-     FROM Sales.SalesOrderDetail 
-     GROUP BY ProductID) AS totals
-ON 
+Join 
+    (Select ProductID, Sum(OrderQty) As TotalSold
+     --Subquery created
+     From 
+        Sales.SalesOrderDetail 
+        Group By ProductID) As totals
+     --Finished 
+On 
     p.ProductID = totals.ProductID;
