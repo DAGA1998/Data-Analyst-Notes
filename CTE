@@ -17,4 +17,8 @@ on
     p.ProductSubcategoryID
 Where
     p.ListPrice > cte.AvgPrice;
-/*CategoryAvgPrice calculates the average price for each subcategory 
+/*CategoryAvgPrice calculates the average price for each 
+subcategory grouping it,
+also the principal query joins Production.Product table with the CTE on the subcategory of the product,
+finally, it selects the products whose List price is bigger than the average on their subcategory*/
+
